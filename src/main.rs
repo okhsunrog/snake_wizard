@@ -7,7 +7,7 @@ use uom::si::{
 };
 
 use anyhow::Result;
-use bme280_rs::{Bme280, Configuration, Oversampling, SensorMode};
+use bme280_rs::{Bme280, Configuration, Filter, Oversampling, SensorMode};
 use esp_idf_svc::hal::{delay::Delay, i2c::*, peripherals::Peripherals, prelude::*};
 
 fn main() -> Result<()> {
@@ -26,16 +26,17 @@ fn main() -> Result<()> {
             .with_temperature_oversampling(Oversampling::Oversample1)
             .with_pressure_oversampling(Oversampling::Oversample1)
             .with_humidity_oversampling(Oversampling::Oversample1)
-            .with_sensor_mode(SensorMode::Normal),
+            .with_sensor_mode(SensorMode::Forced)
+            .with_filter(Filter::Off),
     )?;
-    thread::sleep(Duration::from_secs(1));
+    thread::sleep(Duration::from_secs(3));
 
     loop {
+        let _ = bme280.take_forced_measurement();
         match bme280.read_sample() {
             Ok(sample) => {
-                let temp: ThermodynamicTemperature =
-                    sample.temperature.expect("No temperature").into();
-                let pressure: Pressure = sample.pressure.expect("No pressure").into();
+                let temp: ThermodynamicTemperature = sample.temperature.expect("No temperature");
+                let pressure: Pressure = sample.pressure.expect("No pressure");
                 let humidity: Ratio = sample.humidity.expect("No humidity");
 
                 // Convert to desired units
@@ -54,6 +55,6 @@ fn main() -> Result<()> {
                 println!("Failed to read sample: {:?}", e);
             }
         }
-        thread::sleep(Duration::from_secs(1));
+        thread::sleep(Duration::from_secs(5));
     }
 }
