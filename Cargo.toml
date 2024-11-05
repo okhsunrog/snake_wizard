@@ -26,6 +26,11 @@ experimental = ["esp-idf-svc/experimental"]
 log = "0.4"
 esp-idf-svc = { version = "0.49", features = ["critical-section", "alloc", "embassy-time-driver", "embassy-sync", "wake-from-isr"] }
 edge-executor = "0.4.1"
+bme280-rs = { version = "0.3.0", features = ["uom"] }
+uom = "0.36.0"
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
+embassy-sync = "0.6.0"
 anyhow = "1.0.92"
 
 [build-dependencies]
