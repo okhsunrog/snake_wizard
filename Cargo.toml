@@ -31,7 +31,7 @@ uom = "0.36.0"
 embedded-hal = "1.0.0"
 embedded-hal-async = "1.0.0"
 embassy-sync = "0.6.0"
-anyhow = "1.0.92"
+anyhow = "1.0.93"
 
 [build-dependencies]
 embuild = "0.32.0"
