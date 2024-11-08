@@ -15,7 +15,7 @@ fn main() -> Result<()> {
     esp_idf_svc::log::EspLogger::initialize_default();
     let p = Peripherals::take()?;
     let config = I2cConfig::new().baudrate(100.kHz().into());
-    let i2c = I2cDriver::new(p.i2c0, p.pins.gpio9, p.pins.gpio10, &config)?;
+    let i2c = I2cDriver::new(p.i2c0, p.pins.gpio41, p.pins.gpio42, &config)?;
 
     let bme280_addr = 0x76;
     info!("Setting up BME280");
