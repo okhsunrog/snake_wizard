@@ -14,10 +14,7 @@ build-std = ["std", "panic_abort"]
 
 [env]
 MCU = "esp32s3"
-ESP_IDF_VERSION = "v5.3.1"
+ESP_IDF_VERSION = "v5.4"
 # Remove these 2 lines if not using global installation of esp-idf
 ESP_IDF_TOOLS_INSTALL_DIR = "global"
 IDF_PATH = "/home/okhsunrog/esp/esp-idf"
-
-# Workaround for https://github.com/esp-rs/esp-idf-template/issues/174 
-CRATE_CC_NO_DEFAULTS = "1"
