@@ -2,13 +2,13 @@
 name = "snake_wizard"
 version = "0.1.0"
 authors = ["okhsunrog <me@okhsunrog.dev>"]
-edition = "2021"
+edition = "2024"
 resolver = "2"
-rust-version = "1.77"
+rust-version = "1.85"
 
 [[bin]]
 name = "snake_wizard"
-harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
+harness = false       # do not use the built in cargo test harness -> resolve rust-analyzer errors
 
 [profile.release]
 opt-level = "s"
@@ -24,7 +24,13 @@ experimental = ["esp-idf-svc/experimental"]
 
 [dependencies]
 log = "0.4"
-esp-idf-svc = { version = "0.51", features = ["critical-section", "alloc", "embassy-time-driver", "embassy-sync", "wake-from-isr"] }
+esp-idf-svc = { version = "0.51", features = [
+  "critical-section",
+  "alloc",
+  "embassy-time-driver",
+  "embassy-sync",
+  "wake-from-isr",
+] }
 edge-executor = "0.4"
 bme280-rs = { version = "0.3.0", features = ["uom"] }
 uom = "0.36"
